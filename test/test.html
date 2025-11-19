@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dodger Game Tests</title>
+    <style>
+        body {
+            background: linear-gradient(180deg, #000428 0%, #004e92 100%);
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h2 {
+            text-shadow: 0 0 20px #00bcd4;
+        }
+        #output {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #00bcd4;
+            line-height: 1.8;
+        }
+        .pass { color: #00e676; }
+        .fail { color: #ff1744; }
+    </style>
+</head>
+<body>
+<h2>🚀 Dodger Game Test Suite</h2>
+<pre id="output">Loading tests...</pre>
+
+<script>
+console.log("Test script starting...");
+
+// --- Copy game functions for testing ---
+function checkCollision(a, b) {
+    const OBSTACLE_WIDTH = 20;
+    const OBSTACLE_HEIGHT = 20;
+    return (
+        a.x < b.x + OBSTACLE_WIDTH &&
+        a.x + a.size > b.x &&
+        a.y < b.y + OBSTACLE_HEIGHT &&
+        a.y + a.size > b.y
+    );
+}
+
+// --- Test helper ---
+let passed = 0;
+let failed = 0;
+
+function test(name, fn) {
+    const out = document.getElementById("output");
+    console.log("Running test:", name);
+    try {
+        fn();
+        out.innerHTML += '<span class="pass">✔ PASS</span> ' + name + '\n';
+        passed++;
+        console.log("PASS:", name);
+    } catch (e) {
+        out.innerHTML += '<span class="fail">✘ FAIL</span> ' + name + ' — ' + e.message + '\n';
+        failed++;
+        console.log("FAIL:", name, e.message);
+    }
+}
+
+function assertEqual(actual, expected, message) {
+    if (actual !== expected) {
+        throw new Error(message || `Expected ${expected}, got ${actual}`);
+    }
+}
+
+function assertTrue(condition, message) {
+    if (!condition) {
+        throw new Error(message || "Assertion failed");
+    }
+}
+
+function assertFalse(condition, message) {
+    if (condition) {
+        throw new Error(message || "Expected false");
+    }
+}
+
+// --- Test Cases ---
+const out = document.getElementById("output");
+out.innerHTML = ""; // Clear loading message
+
+// Level Calculation Tests
+test("Score 0 should be level 1", () => {
+    const score = 0;
+    const level = Math.floor(score / 1000) + 1;
+    assertEqual(level, 1, "Score 0 should be level 1");
+});
+
+test("Score 999 should be level 1", () => {
+    const score = 999;
+    const level = Math.floor(score / 1000) + 1;
+    assertEqual(level, 1, "Score 999 should be level 1");
+});
+
+test("Score 1000 should be level 2", () => {
+    const score = 1000;
+    const level = Math.floor(score / 1000) + 1;
+    assertEqual(level, 2, "Score 1000 should be level 2");
+});
+
+test("Score 2500 should be level 3", () => {
+    const score = 2500;
+    const level = Math.floor(score / 1000) + 1;
+    assertEqual(level, 3, "Score 2500 should be level 3");
+});
+
+// LocalStorage Tests
+test("High score should parse as integer", () => {
+    localStorage.setItem("dodgerHighScore", "1234");
+    const highScore = parseInt(localStorage.getItem("dodgerHighScore"));
+    assertEqual(highScore, 1234, "High score should be parsed correctly");
+});
+
+test("Missing high score should default to 0", () => {
+    localStorage.removeItem("dodgerHighScore");
+    const highScore = parseInt(localStorage.getItem("dodgerHighScore")) || 0;
+    assertEqual(highScore, 0, "Missing high score should default to 0");
+});
+
+// Summary
+setTimeout(() => {
+    const out = document.getElementById("output");
+    out.innerHTML += '\n' + '='.repeat(50) + '\n';
+    out.innerHTML += `<span class="pass">Passed: ${passed}</span> | <span class="fail">Failed: ${failed}</span>\n`;
+    if (failed === 0) {
+        out.innerHTML += '<span class="pass">🎉 All tests passed!</span>\n';
+    }
+}, 100);
+</script>
+
+</body>
+</html>

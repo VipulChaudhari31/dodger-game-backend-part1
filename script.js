@@ -3,24 +3,23 @@ const ctx = canvas.getContext("2d");
 
 const scoreDisplay = document.getElementById("score");
 const highScoreDisplay = document.getElementById("highScore");
+const levelDisplay = document.getElementById("level");
 
-let player, obstacles, score, highScore, gameOver;
+let player, obstacles, score, highScore, gameOver, level;
 
 const PLAYER_SIZE = 20;
 const OBSTACLE_WIDTH = 20;
 const OBSTACLE_HEIGHT = 20;
 
 let keys = {};
+let stars = [];
 
 document.addEventListener("keydown", e => keys[e.key] = true);
 document.addEventListener("keyup", e => keys[e.key] = false);
 
 document.getElementById("restartBtn").onclick = startGame;
 
-// -----------------------
-//  Game Initialization
-// -----------------------
-function startGame() {
+function startGame() { //  Game Initialization
     player = {
         x: canvas.width / 2 - PLAYER_SIZE / 2,
         y: canvas.height - 50,
@@ -30,29 +29,44 @@ function startGame() {
 
     obstacles = [];
     score = 0;
+    level = 1;
     gameOver = false;
 
-    highScore = localStorage.getItem("dodgerHighScore") || 0;
+    highScore = parseInt(localStorage.getItem("dodgerHighScore")) || 0;
     highScoreDisplay.textContent = highScore;
+    levelDisplay.textContent = level;
+       
+    stars = []; // Create background stars
+    for (let i = 0; i < 100; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2
+        });
+    }
 
     requestAnimationFrame(update);
 }
 
-// -----------------------
-//  Spawning Obstacles
-// -----------------------
-function spawnObstacle() {
+function spawnObstacle() { //  Spawning Obstacles
+    const newLevel = Math.floor(score / 1000) + 1; // Calculate level and speed (every 1000 points = new level)
+    if (newLevel !== level) {
+        level = newLevel;
+        levelDisplay.textContent = level;
+    }
+    
+    const baseSpeed = 2;
+    const speedIncrease = (level - 1) * 0.5;
+    const currentSpeed = baseSpeed + speedIncrease;
+    
     obstacles.push({
         x: Math.random() * (canvas.width - OBSTACLE_WIDTH),
         y: -OBSTACLE_HEIGHT,
-        speed: 2 + Math.random() * 3
+        speed: currentSpeed
     });
 }
 
-// -----------------------
-//  Player Movement
-// -----------------------
-function movePlayer() {
+function movePlayer() { //  Player Movement
     if (keys["ArrowLeft"] && player.x > 0) {
         player.x -= player.speed;
     }
@@ -67,10 +81,52 @@ function movePlayer() {
     }
 }
 
-// -----------------------
-//  Collision Detection
-// -----------------------
-function checkCollision(a, b) {
+function drawPlayer() { //  Drawing Functions
+    ctx.fillStyle = "#00e676"; // Draw a spaceship-like triangle
+    ctx.beginPath();
+    ctx.moveTo(player.x + player.size / 2, player.y); // Top point
+    ctx.lineTo(player.x, player.y + player.size); // Bottom left
+    ctx.lineTo(player.x + player.size, player.y + player.size); // Bottom right
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#00bcd4"; // Add engine glow
+    ctx.beginPath();
+    ctx.arc(player.x + player.size / 2, player.y + player.size, 3, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function drawObstacle(o) {
+    ctx.fillStyle = "#ff1744"; // Draw meteor-like shapes
+    ctx.beginPath();
+      
+    const cx = o.x + OBSTACLE_WIDTH / 2; // Irregular hexagon for meteor look
+    const cy = o.y + OBSTACLE_HEIGHT / 2;
+    const points = 6;
+    
+    for (let i = 0; i < points; i++) {
+        const angle = (i / points) * Math.PI * 2;
+        const radius = (OBSTACLE_WIDTH / 2) * (0.8 + Math.random() * 0.4);
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius;
+        
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    }
+    
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#c41c3b";
+    ctx.beginPath();
+    ctx.arc(cx, cy, OBSTACLE_WIDTH / 4, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function checkCollision(a, b) { //  Collision Detection
     return (
         a.x < b.x + OBSTACLE_WIDTH &&
         a.x + a.size > b.x &&
@@ -79,59 +135,51 @@ function checkCollision(a, b) {
     );
 }
 
-// -----------------------
-//  Game Loop
-// -----------------------
-let spawnTimer = 0;
+let spawnTimer = 0; //  Game Loop
 
 function update() {
     if (gameOver) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = "#ffffff"; // Draw background stars
+    for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
 
-    // Player movement
-    movePlayer();
+    movePlayer(); // Player movement
 
-    // Draw player
-    ctx.fillStyle = "#00e676";
-    ctx.fillRect(player.x, player.y, player.size, player.size);
+    drawPlayer(); // Draw player
 
-    // Obstacle spawning
-    spawnTimer++;
+    spawnTimer++; // Obstacle spawning
     if (spawnTimer > 45) { 
         spawnObstacle();
         spawnTimer = 0;
     }
 
-    // Move and draw obstacles
-    ctx.fillStyle = "#ff1744";
-    for (let i = obstacles.length - 1; i >= 0; i--) {
+    for (let i = obstacles.length - 1; i >= 0; i--) { // Move and draw obstacles
         let o = obstacles[i];
         o.y += o.speed;
 
-        ctx.fillRect(o.x, o.y, OBSTACLE_WIDTH, OBSTACLE_HEIGHT);
+        drawObstacle(o);
 
-        // Remove off-screen obstacles
-        if (o.y > canvas.height) obstacles.splice(i, 1);
+        if (o.y > canvas.height) obstacles.splice(i, 1); // Remove off-screen obstacles
 
-        // Check collision
-        if (checkCollision(player, o)) {
+        if (checkCollision(player, o)) { // Check collision
             gameOver = true;
             handleGameOver();
         }
     }
 
-    // Update score
-    score++;
+    score++; // Update score
     scoreDisplay.textContent = score;
 
     requestAnimationFrame(update);
 }
 
-// -----------------------
-//  Game Over Handling
-// -----------------------
-function handleGameOver() {
+function handleGameOver() {  //  Game Over Handling
     ctx.fillStyle = "rgba(0,0,0,0.6)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -146,5 +194,5 @@ function handleGameOver() {
     }
 }
 
-// Start game
-startGame();
+
+startGame(); // Start game
