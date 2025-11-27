@@ -13,3 +13,9 @@
 /home/vipul/projects/dodger-game/backend/DodgerGameManager/obj/Debug/net8.0/DodgerGameManager.pdb
 /home/vipul/projects/dodger-game/backend/DodgerGameManager/obj/Debug/net8.0/DodgerGameManager.genruntimeconfig.cache
 /home/vipul/projects/dodger-game/backend/DodgerGameManager/obj/Debug/net8.0/ref/DodgerGameManager.dll
+/home/vipul/projects/dodger-game/backend/DodgerGameManager/bin/Debug/net8.0/System.IO.Pipelines.dll
+/home/vipul/projects/dodger-game/backend/DodgerGameManager/bin/Debug/net8.0/System.Text.Encodings.Web.dll
+/home/vipul/projects/dodger-game/backend/DodgerGameManager/bin/Debug/net8.0/System.Text.Json.dll
+/home/vipul/projects/dodger-game/backend/DodgerGameManager/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
+/home/vipul/projects/dodger-game/backend/DodgerGameManager/obj/Debug/net8.0/DodgerGameManager.csproj.AssemblyReference.cache
+/home/vipul/projects/dodger-game/backend/DodgerGameManager/obj/Debug/net8.0/DodgerGameManager.csproj.CopyComplete

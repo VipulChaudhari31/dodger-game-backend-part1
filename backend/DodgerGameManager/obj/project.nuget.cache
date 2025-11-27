@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "dceOk2qIzys7KWP3a6JIdCSk+2MWEuaDRm6CU8QzGv1yrN1vD70FcLgWZaNsNQ/E3S+laOW4X+FziqeJfr8/+w==",
+  "dgSpecHash": "xX/LMn/2xUSlEeO+nrFeJ03PUQSaFDBYx1kIjMvRR6ZSbF068UNhbbsbsjerC1PUM1Kjh/cDQ06oaa8DFC1Aww==",
   "success": true,
   "projectFilePath": "/home/vipul/projects/dodger-game/backend/DodgerGameManager/DodgerGameManager.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/vipul/.nuget/packages/system.io.pipelines/10.0.0/system.io.pipelines.10.0.0.nupkg.sha512",
+    "/home/vipul/.nuget/packages/system.text.encodings.web/10.0.0/system.text.encodings.web.10.0.0.nupkg.sha512",
+    "/home/vipul/.nuget/packages/system.text.json/10.0.0/system.text.json.10.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
