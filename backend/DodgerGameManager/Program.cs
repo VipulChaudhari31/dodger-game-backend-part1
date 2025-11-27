@@ -6,128 +6,113 @@ namespace DodgerGameManager;
 
 /// <summary>
 /// Dodger Game Data Management System
-/// Sprint 3: Random Data Generation Implementation
+/// Sprint 4: LINQ Queries and Analytics Implementation
 /// </summary>
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("╔══════════════════════════════════════════════════╗");
-        Console.WriteLine("║   DODGER GAME DATA MANAGEMENT SYSTEM - Sprint 3  ║");
+        Console.WriteLine("║   DODGER GAME DATA MANAGEMENT SYSTEM - Sprint 4  ║");
         Console.WriteLine("╚══════════════════════════════════════════════════╝\n");
 
-        Console.WriteLine("Sprint 3: Random Data Generation Implementation\n");
+        Console.WriteLine("Sprint 4: LINQ Queries and Analytics Implementation\n");
         Console.WriteLine("Learning Outcomes Demonstrated:");
-        Console.WriteLine("✓ Generating Random Data\n");
+        Console.WriteLine("✓ Introduction to LINQ");
+        Console.WriteLine("✓ Summarising Data with LINQ\n");
 
-        // Demonstrate random data generation
-        DemonstrateRandomDataGeneration();
+        // Demonstrate LINQ analytics
+        DemonstrateLINQAnalytics();
     }
 
 
-    static void DemonstrateRandomDataGeneration()
+    static void DemonstrateLINQAnalytics()
     {
         var dataService = new GameDataService();
         var generator = new DataGenerator(dataService);
+        var analytics = new AnalyticsService(dataService);
 
         Console.WriteLine("╔════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║        RANDOM DATA GENERATION DEMONSTRATION            ║");
+        Console.WriteLine("║          LINQ QUERIES AND ANALYTICS DEMONSTRATION      ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════╝\n");
 
-        // ============ Individual Generation ============
-        Console.WriteLine("--- Individual Entity Generation ---");
-        
-        generator.GenerateRandomPlayers(5);
-        generator.GenerateRandomObstacles(8);
-        generator.GenerateRandomPowerUps(6);
-        generator.GenerateRandomGameSessions(15);
-
-        Console.WriteLine("\n--- Viewing Sample Generated Data ---\n");
-
-        // Show some sample players
-        Console.WriteLine("Sample Players (Top 3):");
-        var players = dataService.GetAllPlayers().Take(3);
-        foreach (var player in players)
-        {
-            Console.WriteLine($"  {player}");
-        }
-        Console.WriteLine();
-
-        // Show some sample obstacles
-        Console.WriteLine("Sample Obstacles (Top 3):");
-        var obstacles = dataService.GetAllObstacles().Take(3);
-        foreach (var obstacle in obstacles)
-        {
-            Console.WriteLine($"  {obstacle}");
-        }
-        Console.WriteLine();
-
-        // Show some sample power-ups
-        Console.WriteLine("Sample Power-ups (Top 3):");
-        var powerUps = dataService.GetAllPowerUps().Take(3);
-        foreach (var powerUp in powerUps)
-        {
-            Console.WriteLine($"  {powerUp}");
-        }
-        Console.WriteLine();
-
-        // Show some sample game sessions
-        Console.WriteLine("Sample Game Sessions (Top 5):");
-        var sessions = dataService.GetAllGameSessions().Take(5);
-        foreach (var session in sessions)
-        {
-            Console.WriteLine($"  {session}");
-        }
-        Console.WriteLine();
-
-        // ============ Complete Dataset Generation ============
-        Console.WriteLine("\n--- Testing Complete Dataset Generation ---");
-        
-        // Clear previous data
-        dataService.ClearAllData();
-        Console.WriteLine("\nCleared all existing data.");
-        
-        // Generate complete dataset
+        // Generate sample data for analysis
+        Console.WriteLine("Generating sample dataset for LINQ analysis...\n");
         generator.GenerateCompleteDataset();
 
-        // ============ Summary Statistics ============
+        Console.WriteLine("\n" + new string('=', 60));
+        Console.WriteLine("DEMONSTRATING LINQ OPERATORS AND QUERIES");
+        Console.WriteLine(new string('=', 60));
+
+        // ============ Player Analytics ============
+        analytics.ShowPlayerStatistics();
+        
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+        
+        analytics.ShowPlayerRankings();
+
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+
+        // ============ Game Session Analytics ============
+        analytics.ShowGameSessionStatistics();
+        
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+        
+        analytics.ShowRecentSessions(10);
+
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+
+        // ============ Obstacle Analytics ============
+        analytics.ShowObstacleStatistics();
+
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+
+        // ============ PowerUp Analytics ============
+        analytics.ShowPowerUpStatistics();
+
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+
+        // ============ Advanced LINQ Queries ============
+        analytics.ShowAdvancedAnalytics();
+
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+
+        // ============ Search and Filter Examples ============
         Console.WriteLine("\n╔════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                  GENERATION SUMMARY                    ║");
+        Console.WriteLine("║          SEARCH AND FILTER (LINQ Where)                ║");
+        Console.WriteLine("╚════════════════════════════════════════════════════════╝");
+
+        // Search players by name
+        analytics.SearchPlayers("Star");
+
+        Console.WriteLine();
+
+        // Filter obstacles by speed
+        analytics.FilterObstaclesBySpeed(3.0, 5.0);
+
+        // ============ Summary ============
+        Console.WriteLine("\n\n╔════════════════════════════════════════════════════════╗");
+        Console.WriteLine("║              LINQ OPERATIONS DEMONSTRATED              ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════╝\n");
 
-        Console.WriteLine($"Total Players:       {dataService.GetTotalPlayers()}");
-        Console.WriteLine($"Total Obstacles:     {dataService.GetTotalObstacles()}");
-        Console.WriteLine($"Total Power-ups:     {dataService.GetTotalPowerUps()}");
-        Console.WriteLine($"Total Game Sessions: {dataService.GetTotalGameSessions()}");
+        Console.WriteLine("✓ Aggregation: Count(), Sum(), Average(), Min(), Max()");
+        Console.WriteLine("✓ Ordering: OrderBy(), OrderByDescending()");
+        Console.WriteLine("✓ Filtering: Where(), First(), Take()");
+        Console.WriteLine("✓ Grouping: GroupBy()");
+        Console.WriteLine("✓ Projection: Select()");
+        Console.WriteLine("✓ Joining: Join() with group join");
+        Console.WriteLine("✓ Quantifiers: Any()");
+        Console.WriteLine("✓ Set Operations: Distinct grouping");
+        Console.WriteLine("✓ Complex Queries: Multi-level grouping and aggregation");
 
-        // Show data distribution
-        Console.WriteLine("\n--- Data Distribution ---");
-        
-        var allPlayers = dataService.GetAllPlayers();
-        Console.WriteLine("\nPlayers by Rank:");
-        var rankGroups = allPlayers.GroupBy(p => p.Rank);
-        foreach (var group in rankGroups.OrderByDescending(g => g.Count()))
-        {
-            Console.WriteLine($"  {group.Key}: {group.Count()} players");
-        }
-
-        var allSessions = dataService.GetAllGameSessions();
-        Console.WriteLine("\nSessions by Difficulty:");
-        var difficultyGroups = allSessions.GroupBy(s => s.Difficulty);
-        foreach (var group in difficultyGroups.OrderByDescending(g => g.Count()))
-        {
-            Console.WriteLine($"  {group.Key}: {group.Count()} sessions");
-        }
-
-        var allPowerUps = dataService.GetAllPowerUps();
-        Console.WriteLine("\nPower-ups by Rarity:");
-        var rarityGroups = allPowerUps.GroupBy(p => p.Rarity);
-        foreach (var group in rarityGroups.OrderBy(g => g.Key))
-        {
-            Console.WriteLine($"  {group.Key}: {group.Count()} power-ups");
-        }
-
-        Console.WriteLine("\n✓ Random data generation completed successfully!");
-        Console.WriteLine("\nReady for Sprint 4: LINQ Queries and Analytics");
+        Console.WriteLine("\n✓ All LINQ analytics completed successfully!");
+        Console.WriteLine("\nReady for Sprint 5: Console Interface and Data Persistence");
     }
 }
