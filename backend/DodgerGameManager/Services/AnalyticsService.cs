@@ -5,8 +5,6 @@ namespace DodgerGameManager.Services;
 
 /// <summary>
 /// Provides LINQ-based data analysis and reporting
-/// Demonstrates: Introduction to LINQ, Summarising Data with LINQ
-/// Learning Outcomes: Introduction to LINQ, Summarising Data with LINQ
 /// </summary>
 public class AnalyticsService
 {
