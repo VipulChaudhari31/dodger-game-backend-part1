@@ -1,165 +1,133 @@
 ﻿using DodgerGameManager.Models;
 using DodgerGameManager.Services;
+using DodgerGameManager.Utils;
 
 namespace DodgerGameManager;
 
 /// <summary>
 /// Dodger Game Data Management System
-/// Sprint 2: CRUD Operations Implementation
+/// Sprint 3: Random Data Generation Implementation
 /// </summary>
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("╔══════════════════════════════════════════════════╗");
-        Console.WriteLine("║   DODGER GAME DATA MANAGEMENT SYSTEM - Sprint 2  ║");
+        Console.WriteLine("║   DODGER GAME DATA MANAGEMENT SYSTEM - Sprint 3  ║");
         Console.WriteLine("╚══════════════════════════════════════════════════╝\n");
 
-        Console.WriteLine("Sprint 2: CRUD Operations Implementation\n");
+        Console.WriteLine("Sprint 3: Random Data Generation Implementation\n");
         Console.WriteLine("Learning Outcomes Demonstrated:");
-        Console.WriteLine("✓ Understanding Data Management");
-        Console.WriteLine("✓ Using Arrays and Lists");
-        Console.WriteLine("✓ Implementing CRUD Operations\n");
+        Console.WriteLine("✓ Generating Random Data\n");
 
-        // Demonstrate CRUD operations
-        DemonstrateCRUDOperations();
+        // Demonstrate random data generation
+        DemonstrateRandomDataGeneration();
     }
 
 
-    static void DemonstrateCRUDOperations()
+    static void DemonstrateRandomDataGeneration()
     {
         var dataService = new GameDataService();
+        var generator = new DataGenerator(dataService);
 
         Console.WriteLine("╔════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║            CRUD OPERATIONS DEMONSTRATION               ║");
+        Console.WriteLine("║        RANDOM DATA GENERATION DEMONSTRATION            ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════╝\n");
 
-        // ============ CREATE Operations ============
-        Console.WriteLine("--- CREATE Operations ---\n");
+        // ============ Individual Generation ============
+        Console.WriteLine("--- Individual Entity Generation ---");
         
-        Console.WriteLine("Creating Players...");
-        var player1 = dataService.CreatePlayer("SpaceAce");
-        var player2 = dataService.CreatePlayer("MeteorMaster");
-        var player3 = dataService.CreatePlayer("StarNavigator");
-        Console.WriteLine($"✓ Created {dataService.GetTotalPlayers()} players\n");
+        generator.GenerateRandomPlayers(5);
+        generator.GenerateRandomObstacles(8);
+        generator.GenerateRandomPowerUps(6);
+        generator.GenerateRandomGameSessions(15);
 
-        Console.WriteLine("Creating Obstacles...");
-        var obstacle1 = dataService.CreateObstacle("Red Meteor", "Meteor", 3.5, 100, 25);
-        var obstacle2 = dataService.CreateObstacle("Blue Comet", "Comet", 4.0, 120, 30);
-        Console.WriteLine($"✓ Created {dataService.GetTotalObstacles()} obstacles\n");
+        Console.WriteLine("\n--- Viewing Sample Generated Data ---\n");
 
-        Console.WriteLine("Creating Power-ups...");
-        var powerUp1 = dataService.CreatePowerUp("Shield Boost", "Defensive", "Temporary Shield", 10, 200);
-        var powerUp2 = dataService.CreatePowerUp("Speed Burst", "Offensive", "Increased Speed", 5, 150);
-        Console.WriteLine($"✓ Created {dataService.GetTotalPowerUps()} power-ups\n");
-
-        Console.WriteLine("Creating Game Sessions...");
-        var session1 = dataService.CreateGameSession(player1.PlayerId, player1.PlayerName, 2500, 3, TimeSpan.FromMinutes(3));
-        var session2 = dataService.CreateGameSession(player2.PlayerId, player2.PlayerName, 5500, 6, TimeSpan.FromMinutes(7));
-        Console.WriteLine($"✓ Created {dataService.GetTotalGameSessions()} game sessions\n");
-
-        // ============ READ Operations ============
-        Console.WriteLine("--- READ Operations ---\n");
-        
-        Console.WriteLine("All Players:");
-        foreach (var player in dataService.GetAllPlayers())
+        // Show some sample players
+        Console.WriteLine("Sample Players (Top 3):");
+        var players = dataService.GetAllPlayers().Take(3);
+        foreach (var player in players)
         {
             Console.WriteLine($"  {player}");
         }
         Console.WriteLine();
 
-        Console.WriteLine("All Obstacles:");
-        foreach (var obstacle in dataService.GetAllObstacles())
+        // Show some sample obstacles
+        Console.WriteLine("Sample Obstacles (Top 3):");
+        var obstacles = dataService.GetAllObstacles().Take(3);
+        foreach (var obstacle in obstacles)
         {
             Console.WriteLine($"  {obstacle}");
         }
         Console.WriteLine();
 
-        Console.WriteLine("All Power-ups:");
-        foreach (var powerUp in dataService.GetAllPowerUps())
+        // Show some sample power-ups
+        Console.WriteLine("Sample Power-ups (Top 3):");
+        var powerUps = dataService.GetAllPowerUps().Take(3);
+        foreach (var powerUp in powerUps)
         {
             Console.WriteLine($"  {powerUp}");
         }
         Console.WriteLine();
 
-        Console.WriteLine("All Game Sessions:");
-        foreach (var session in dataService.GetAllGameSessions())
+        // Show some sample game sessions
+        Console.WriteLine("Sample Game Sessions (Top 5):");
+        var sessions = dataService.GetAllGameSessions().Take(5);
+        foreach (var session in sessions)
         {
             Console.WriteLine($"  {session}");
         }
         Console.WriteLine();
 
-        Console.WriteLine($"Getting Player by ID (ID: {player1.PlayerId}):");
-        var foundPlayer = dataService.GetPlayerById(player1.PlayerId);
-        Console.WriteLine($"  {foundPlayer}\n");
+        // ============ Complete Dataset Generation ============
+        Console.WriteLine("\n--- Testing Complete Dataset Generation ---");
+        
+        // Clear previous data
+        dataService.ClearAllData();
+        Console.WriteLine("\nCleared all existing data.");
+        
+        // Generate complete dataset
+        generator.GenerateCompleteDataset();
 
-        Console.WriteLine($"Getting Sessions for Player '{player2.PlayerName}':");
-        var playerSessions = dataService.GetGameSessionsByPlayerId(player2.PlayerId);
-        foreach (var session in playerSessions)
-        {
-            Console.WriteLine($"  {session}");
-        }
-        Console.WriteLine();
-
-        // ============ UPDATE Operations ============
-        Console.WriteLine("--- UPDATE Operations ---\n");
-        
-        Console.WriteLine($"Updating Player '{player3.PlayerName}'...");
-        Console.WriteLine($"  Before: {dataService.GetPlayerById(player3.PlayerId)}");
-        
-        dataService.UpdatePlayer(player3.PlayerId, p =>
-        {
-            p.HighestScore = 8000;
-            p.TotalGamesPlayed = 15;
-            p.TotalScore = 45000;
-            p.Rank = "Master";
-        });
-        
-        Console.WriteLine($"  After:  {dataService.GetPlayerById(player3.PlayerId)}\n");
-
-        Console.WriteLine($"Updating Obstacle '{obstacle1.ObstacleName}'...");
-        Console.WriteLine($"  Before: {dataService.GetObstacleById(obstacle1.ObstacleId)}");
-        
-        dataService.UpdateObstacle(obstacle1.ObstacleId, o =>
-        {
-            o.Speed = 5.0;
-            o.DamagePoints = 150;
-            o.Color = "Dark Red";
-        });
-        
-        Console.WriteLine($"  After:  {dataService.GetObstacleById(obstacle1.ObstacleId)}\n");
-
-        Console.WriteLine($"Updating Power-up '{powerUp1.PowerUpName}'...");
-        Console.WriteLine($"  Before: {dataService.GetPowerUpById(powerUp1.PowerUpId)}");
-        
-        dataService.UpdatePowerUp(powerUp1.PowerUpId, p =>
-        {
-            p.DurationSeconds = 15;
-            p.PointsValue = 300;
-            p.Rarity = "Epic";
-        });
-        
-        Console.WriteLine($"  After:  {dataService.GetPowerUpById(powerUp1.PowerUpId)}\n");
-
-        // ============ DELETE Operations ============
-        Console.WriteLine("--- DELETE Operations ---\n");
-        
-        Console.WriteLine($"Total Power-ups before deletion: {dataService.GetTotalPowerUps()}");
-        Console.WriteLine($"Deleting Power-up ID {powerUp2.PowerUpId}...");
-        bool deleted = dataService.DeletePowerUp(powerUp2.PowerUpId);
-        Console.WriteLine($"✓ Deletion successful: {deleted}");
-        Console.WriteLine($"Total Power-ups after deletion: {dataService.GetTotalPowerUps()}\n");
-
-        // ============ Summary ============
-        Console.WriteLine("╔════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                    DATA SUMMARY                        ║");
+        // ============ Summary Statistics ============
+        Console.WriteLine("\n╔════════════════════════════════════════════════════════╗");
+        Console.WriteLine("║                  GENERATION SUMMARY                    ║");
         Console.WriteLine("╚════════════════════════════════════════════════════════╝\n");
+
         Console.WriteLine($"Total Players:       {dataService.GetTotalPlayers()}");
         Console.WriteLine($"Total Obstacles:     {dataService.GetTotalObstacles()}");
         Console.WriteLine($"Total Power-ups:     {dataService.GetTotalPowerUps()}");
-        Console.WriteLine($"Total Game Sessions: {dataService.GetTotalGameSessions()}\n");
+        Console.WriteLine($"Total Game Sessions: {dataService.GetTotalGameSessions()}");
 
-        Console.WriteLine("✓ All CRUD operations completed successfully!");
-        Console.WriteLine("\nReady for Sprint 3: Random Data Generation");
+        // Show data distribution
+        Console.WriteLine("\n--- Data Distribution ---");
+        
+        var allPlayers = dataService.GetAllPlayers();
+        Console.WriteLine("\nPlayers by Rank:");
+        var rankGroups = allPlayers.GroupBy(p => p.Rank);
+        foreach (var group in rankGroups.OrderByDescending(g => g.Count()))
+        {
+            Console.WriteLine($"  {group.Key}: {group.Count()} players");
+        }
+
+        var allSessions = dataService.GetAllGameSessions();
+        Console.WriteLine("\nSessions by Difficulty:");
+        var difficultyGroups = allSessions.GroupBy(s => s.Difficulty);
+        foreach (var group in difficultyGroups.OrderByDescending(g => g.Count()))
+        {
+            Console.WriteLine($"  {group.Key}: {group.Count()} sessions");
+        }
+
+        var allPowerUps = dataService.GetAllPowerUps();
+        Console.WriteLine("\nPower-ups by Rarity:");
+        var rarityGroups = allPowerUps.GroupBy(p => p.Rarity);
+        foreach (var group in rarityGroups.OrderBy(g => g.Key))
+        {
+            Console.WriteLine($"  {group.Key}: {group.Count()} power-ups");
+        }
+
+        Console.WriteLine("\n✓ Random data generation completed successfully!");
+        Console.WriteLine("\nReady for Sprint 4: LINQ Queries and Analytics");
     }
 }
