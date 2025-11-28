@@ -12,6 +12,7 @@ This application demonstrates a complete data management system for a space-them
 - **.NET 8.0** - Latest LTS framework
 - **C# 12** - Modern language features including records, init-only properties
 - **System.Text.Json** - High-performance JSON serialization/deserialization
+- **xUnit** - Industry-standard unit testing framework
 
 ### Language Features Demonstrated
 - **Records** - Immutable data types (Player, Obstacle)
@@ -21,6 +22,7 @@ This application demonstrates a complete data management system for a space-them
 - **Generic Collections** - List<T> for type-safe storage
 - **Lambda Expressions** - Functional programming patterns
 - **Extension Methods** - Clean, readable code
+- **Unit Testing** - xUnit with Arrange-Act-Assert pattern
 
 ## 📁 Project Structure
 
@@ -39,6 +41,14 @@ DodgerGameManager/
 ├── Data/
 │   └── DataPersistenceService.cs # JSON persistence
 └── Program.cs              # Main menu interface
+
+DodgerGameManager.Tests/
+├── Services/
+│   └── GameDataServiceTests.cs    # CRUD operation tests
+├── Utils/
+│   └── DataGeneratorTests.cs      # Data generation tests
+└── Models/
+    └── ModelTests.cs               # Model behavior tests
 ```
 
 ## ✨ Features
@@ -238,6 +248,8 @@ This project demonstrates:
 - ✅ **OOP Principles** - Encapsulation, abstraction, modularity
 - ✅ **Async Programming** - Non-blocking I/O operations
 - ✅ **Error Handling** - Input validation and error management
+- ✅ **Unit Testing** - 45 comprehensive tests with xUnit
+- ✅ **Test-Driven Development** - Code validation and quality assurance
 
 ## 🧪 Testing the Application
 
@@ -259,6 +271,42 @@ ls -lh Data/*.json
 cat Data/all_data.json | head -50
 ```
 
+## 🧪 Unit Testing
+
+### Test Project Structure
+```
+DodgerGameManager.Tests/
+├── Services/
+│   └── GameDataServiceTests.cs    # 25 tests for CRUD operations
+├── Utils/
+│   └── DataGeneratorTests.cs      # 16 tests for data generation
+└── Models/
+    └── ModelTests.cs               # 4 tests for model behavior
+```
+
+### Running Tests
+
+**Run all tests:**
+```bash
+cd DodgerGameManager.Tests
+dotnet test
+```
+
+**Run with detailed output:**
+```bash
+dotnet test --verbosity detailed
+```
+
+### Test Coverage
+
+✅ **45 Total Tests** - All Passing
+
+### Testing Framework
+- **xUnit** - Industry-standard .NET testing framework
+- **Arrange-Act-Assert** pattern
+- **Fact-based** test attributes
+- **Comprehensive assertions** for validation
+
 ## 📝 Development Notes
 
 ### Sprint-Based Development
@@ -267,4 +315,4 @@ This project was built using Agile methodology:
 - **Sprint 2**: CRUD operations implementation
 - **Sprint 3**: Random data generation
 - **Sprint 4**: LINQ queries and analytics
-- **Sprint 5**: Console interface and persistence
+- **Sprint 5**: Console interface and persistence and unit testing

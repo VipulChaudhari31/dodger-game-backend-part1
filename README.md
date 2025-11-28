@@ -1,3 +1,5 @@
+#Please navigate to backend Folder for Backend Project
+
 # High-Score Dodger Game
 
 A space-themed 2D dodging game built with **HTML5 Canvas**, **CSS**, and **JavaScript**.
