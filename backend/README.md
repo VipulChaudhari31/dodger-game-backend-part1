@@ -54,6 +54,7 @@ DodgerGameManager/
 - 50 game sessions with varied difficulty
 - 20 obstacles with different attributes
 - 12 power-ups with rarity tiers
+- and then save it from main menu to see it in GameData Folder
 
 ### 3. **LINQ Query Operations**
 - **Aggregations**: Count(), Sum(), Average(), Min(), Max()
@@ -94,7 +95,7 @@ DodgerGameManager/
 
 1. **Navigate to the backend directory:**
 ```bash
-cd /home/vipul/projects/dodger-game/backend/DodgerGameManager
+cd /dodger-game/backend/DodgerGameManager
 ```
 
 2. **Restore dependencies:**
