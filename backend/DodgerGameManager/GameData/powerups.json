@@ -1,1 +1,134 @@
-[]
+[
+  {
+    "PowerUpId": 1,
+    "PowerUpName": "Hyper Mode",
+    "PowerUpType": "Offensive",
+    "DurationSeconds": 11,
+    "PointsValue": 308,
+    "Effect": "Double Points",
+    "SpawnRate": 0.045,
+    "Rarity": "Epic",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 2,
+    "PowerUpName": "Shield Boost",
+    "PowerUpType": "Offensive",
+    "DurationSeconds": 3,
+    "PointsValue": 486,
+    "Effect": "Temporary Shield",
+    "SpawnRate": 0.081,
+    "Rarity": "Uncommon",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 3,
+    "PowerUpName": "Hyper Mode",
+    "PowerUpType": "Utility",
+    "DurationSeconds": 4,
+    "PointsValue": 1440,
+    "Effect": "Attract Points",
+    "SpawnRate": 0.052000000000000005,
+    "Rarity": "Legendary",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 4,
+    "PowerUpName": "Turbo Charge",
+    "PowerUpType": "Defensive",
+    "DurationSeconds": 7,
+    "PointsValue": 427,
+    "Effect": "Attract Points",
+    "SpawnRate": 0.172,
+    "Rarity": "Common",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 5,
+    "PowerUpName": "Speed Burst",
+    "PowerUpType": "Offensive",
+    "DurationSeconds": 4,
+    "PointsValue": 174,
+    "Effect": "Attract Points",
+    "SpawnRate": 0.175,
+    "Rarity": "Uncommon",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 6,
+    "PowerUpName": "Turbo Charge",
+    "PowerUpType": "Utility",
+    "DurationSeconds": 13,
+    "PointsValue": 256,
+    "Effect": "Power Increase",
+    "SpawnRate": 0.24,
+    "Rarity": "Common",
+    "IsCollectible": false
+  },
+  {
+    "PowerUpId": 7,
+    "PowerUpName": "Shield Boost",
+    "PowerUpType": "Bonus",
+    "DurationSeconds": 6,
+    "PointsValue": 467,
+    "Effect": "Immunity",
+    "SpawnRate": 0.069,
+    "Rarity": "Uncommon",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 8,
+    "PowerUpName": "Speed Burst",
+    "PowerUpType": "Bonus",
+    "DurationSeconds": 5,
+    "PointsValue": 193,
+    "Effect": "Power Increase",
+    "SpawnRate": 0.0644,
+    "Rarity": "Rare",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 9,
+    "PowerUpName": "Cosmic Blessing",
+    "PowerUpType": "Offensive",
+    "DurationSeconds": 3,
+    "PointsValue": 752,
+    "Effect": "Boost Speed",
+    "SpawnRate": 0.0405,
+    "Rarity": "Epic",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 10,
+    "PowerUpName": "Magnet",
+    "PowerUpType": "Bonus",
+    "DurationSeconds": 7,
+    "PointsValue": 246,
+    "Effect": "Ultra Fast",
+    "SpawnRate": 0.236,
+    "Rarity": "Uncommon",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 11,
+    "PowerUpName": "Energy Shield",
+    "PowerUpType": "Offensive",
+    "DurationSeconds": 8,
+    "PointsValue": 199,
+    "Effect": "Damage Protection",
+    "SpawnRate": 0.087,
+    "Rarity": "Common",
+    "IsCollectible": true
+  },
+  {
+    "PowerUpId": 12,
+    "PowerUpName": "Energy Shield",
+    "PowerUpType": "Defensive",
+    "DurationSeconds": 13,
+    "PointsValue": 108,
+    "Effect": "Divine Protection",
+    "SpawnRate": 0.0465,
+    "Rarity": "Epic",
+    "IsCollectible": true
+  }
+]

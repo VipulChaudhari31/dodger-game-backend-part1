@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DodgerGameManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55fa3b0b8d42d382d31fc20561ad65a206840945")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9105d62c3cf7331f6a2a7a9b88b359713efa3983")]
 [assembly: System.Reflection.AssemblyProductAttribute("DodgerGameManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DodgerGameManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
