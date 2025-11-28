@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xX/LMn/2xUSlEeO+nrFeJ03PUQSaFDBYx1kIjMvRR6ZSbF068UNhbbsbsjerC1PUM1Kjh/cDQ06oaa8DFC1Aww==",
+  "dgSpecHash": "W/xJ3pd8K7GGx89eGvH7RjBbxT1wBO1DRXsFr16mRayWEZ6VSO4VH7yZXUQa8ijP6UBFmyCsoODu0GoLA9Wj8Q==",
   "success": true,
-  "projectFilePath": "/home/vipul/projects/dodger-game/backend/DodgerGameManager/DodgerGameManager.csproj",
+  "projectFilePath": "/home/vipul/projects/backend-part1/dodger-game-backend-part1/backend/DodgerGameManager/DodgerGameManager.csproj",
   "expectedPackageFiles": [
     "/home/vipul/.nuget/packages/system.io.pipelines/10.0.0/system.io.pipelines.10.0.0.nupkg.sha512",
     "/home/vipul/.nuget/packages/system.text.encodings.web/10.0.0/system.text.encodings.web.10.0.0.nupkg.sha512",

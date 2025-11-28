@@ -213,11 +213,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vipul/projects/dodger-game/backend/DodgerGameManager/DodgerGameManager.csproj",
+      "projectUniqueName": "/home/vipul/projects/backend-part1/dodger-game-backend-part1/backend/DodgerGameManager/DodgerGameManager.csproj",
       "projectName": "DodgerGameManager",
-      "projectPath": "/home/vipul/projects/dodger-game/backend/DodgerGameManager/DodgerGameManager.csproj",
+      "projectPath": "/home/vipul/projects/backend-part1/dodger-game-backend-part1/backend/DodgerGameManager/DodgerGameManager.csproj",
       "packagesPath": "/home/vipul/.nuget/packages/",
-      "outputPath": "/home/vipul/projects/dodger-game/backend/DodgerGameManager/obj/",
+      "outputPath": "/home/vipul/projects/backend-part1/dodger-game-backend-part1/backend/DodgerGameManager/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/vipul/.nuget/NuGet/NuGet.Config"
